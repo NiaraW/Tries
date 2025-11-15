@@ -14,3 +14,15 @@ struct TrieNode {
             children[i] = nullptr;
     }
 };
+void insert(TrieNode* root, const string &key) {
+    TrieNode* curr = root;
+
+    for (char c : key) {
+        int index = c - 'a';
+        if (curr->children[index] == nullptr)
+            curr->children[index] = new TrieNode();
+        curr = curr->children[index];
+    }
+
+    curr->isEndOfWord = true;
+}
