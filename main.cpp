@@ -74,3 +74,21 @@ TrieNode* deleteKey(TrieNode* root, const string &key, int depth = 0) {
 
     return root;
 }
+
+int main() {
+    TrieNode* root = new TrieNode();
+
+    insert(root, "hello");
+    insert(root, "help");
+    insert(root, "heap");
+
+    cout << search(root, "help") << endl;   // 1
+    cout << search(root, "hel") << endl;    // 0
+
+    root = deleteKey(root, "help");
+
+    cout << search(root, "help") << endl;   // 0
+    cout << search(root, "hello") << endl;  // 1
+
+    return 0;
+}
