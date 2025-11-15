@@ -26,17 +26,17 @@ void insert(TrieNode* root, const string &key) {
 
     curr->isEndOfWord = true;
 }
-bool search(TrieNode* root, const string &key) {
+string search(TrieNode* root, const string &key) {
     TrieNode* curr = root;
 
     for (char c : key) {
         int index = c - 'a';
         if (!curr->children[index])
-            return false;
+            return "not found";
         curr = curr->children[index];
     }
 
-    return curr->isEndOfWord;
+    return curr->isEndOfWord ? "found" : "not found";
 }
 bool isEmpty(TrieNode* node) {
     for (int i = 0; i < ALPHABET_SIZE; i++)
