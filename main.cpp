@@ -32,11 +32,11 @@ bool search(TrieNode* root, const string &key) {
     for (char c : key) {
         int index = c - 'a';
         if (!curr->children[index])
-            return "not found" ;
+            return false;
         curr = curr->children[index];
     }
 
-    return curr->isEndOfWord ? "found" : "not found";
+    return curr->isEndOfWord;
 }
 bool isEmpty(TrieNode* node) {
     for (int i = 0; i < ALPHABET_SIZE; i++)
