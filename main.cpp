@@ -74,7 +74,42 @@ TrieNode* deleteKey(TrieNode* root, const string &key, int depth = 0) {
 
     return root;
 }
+    vector<string> generateEditDistance1(const string& word) {
+    vector<string> results;
+    int n = word.size();
 
+    // Deletions
+    for (int i = 0; i < n; i++) {
+        results.push_back(word.substr(0, i) + word.substr(i+1));
+    }
+
+    // Insertions
+    for (int i = 0; i <= n; i++) {
+        for (char c = 'a'; c <= 'z'; c++) {
+            results.push_back(word.substr(0, i) + c + word.substr(i));
+        }
+    }
+
+    // Replacements
+    for (int i = 0; i < n; i++) {
+        for (char c = 'a'; c <= 'z'; c++) {
+            if (c != word[i])
+                results.push_back(word.substr(0, i) + c + word.substr(i+1));
+        }
+    }
+
+    // Transpositions
+    for (int i = 0; i < n - 1; i++) {
+        string transposed = word;
+        swap(transposed[i], transposed[i + 1]);
+        results.push_back(transposed);
+    }
+
+    return results;
+}
+// Distance Checking
+
+ // spell checker
 int main() {
     TrieNode* root = new TrieNode();
 
