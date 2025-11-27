@@ -128,7 +128,6 @@ vector<string> spellCheck(TrieNode* root, const string& word) {
     return suggestions;
 }
  // spell checker
-
  int main() {
     TrieNode* root = new TrieNode();
 
@@ -162,6 +161,5 @@ vector<string> spellCheck(TrieNode* root, const string& word) {
             }
         }
     }
-
     return 0;
 }
