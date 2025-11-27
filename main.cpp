@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 #include<vector>
+#include <unordered_set> 
 
 const int ALPHABET_SIZE = 26;
 
@@ -27,18 +28,18 @@ void insert(TrieNode* root, const string &key) {
 
     curr->isEndOfWord = true;
 }
-string search(TrieNode* root, const string &key) {
+bool searchBool(TrieNode* root, const string &key) {
     TrieNode* curr = root;
-
     for (char c : key) {
         int index = c - 'a';
         if (!curr->children[index])
-            return "not found";
+            return false;
         curr = curr->children[index];
     }
 
-    return curr->isEndOfWord ? "found" : "not found";
+    return curr->isEndOfWord;
 }
+
 bool isEmpty(TrieNode* node) {
     for (int i = 0; i < ALPHABET_SIZE; i++)
         if (node->children[i] != nullptr)
@@ -75,7 +76,7 @@ TrieNode* deleteKey(TrieNode* root, const string &key, int depth = 0) {
 
     return root;
 }
-    vector<string> generateEditDistance1(const string& word) {
+vector<string> generateEditDistance1(const string& word) {
     vector<string> results;
     int n = word.size();
 
@@ -110,21 +111,22 @@ TrieNode* deleteKey(TrieNode* root, const string &key, int depth = 0) {
 }
 // Distance Checking
 
- // spell checker
-int main() {
-    TrieNode* root = new TrieNode();
 
-    insert(root, "hello");
-    insert(root, "help");
-    insert(root, "heap");
 
-    cout << search(root, "help") << endl;   // 1
-    cout << search(root, "hel") << endl;    // 0
+vector<string> spellCheck(TrieNode* root, const string& word) {
+    vector<string> suggestions;
+    unordered_set<string> seen;
 
-    root = deleteKey(root, "help");
+    vector<string> edits = generateEditDistance1(word);
 
-    cout << search(root, "help") << endl;   // 0
-    cout << search(root, "hello") << endl;  // 1
+    for (int i = 0; i < edits.size(); i++) {
+        const string& candidate = edits[i];
+        if (searchBool(root, candidate) && !seen.count(candidate)) {
+            suggestions.push_back(candidate);
+            seen.insert(candidate);
+        }
+    }
 
-    return 0;
+    return suggestions;
 }
+ // spell checker
