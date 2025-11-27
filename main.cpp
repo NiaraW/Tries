@@ -133,7 +133,15 @@ vector<string> spellCheck(TrieNode* root, const string& word) {
 
     vector<string> dictionary = {
         "hello", "help", "heap", "healthy", "heat",
-        "world", "word", "work", "worked"
+        "world", "word", "work", "worked"     "spell", "sell", "fell", "tell", "yell",
+        "world", "word", "sword", "work", "fork",
+        "book", "look", "took", "cook", "hook",
+        "apple", "apply", "ample", "maple", "sample",
+        "code", "coder", "coding", "decode", "encode",
+        "computer", "compute", "commute", "commuter",
+        "cat", "bat", "rat", "mat", "chat",
+        "tree", "three", "free", "fee", "bee",
+        "car", "bar", "far", "scar", "care"
     };
 
     for (int i = 0; i < dictionary.size(); i++) {
