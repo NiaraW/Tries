@@ -111,8 +111,6 @@ vector<string> generateEditDistance1(const string& word) {
 }
 // Distance Checking
 
-
-
 vector<string> spellCheck(TrieNode* root, const string& word) {
     vector<string> suggestions;
     unordered_set<string> seen;
@@ -130,3 +128,40 @@ vector<string> spellCheck(TrieNode* root, const string& word) {
     return suggestions;
 }
  // spell checker
+
+ int main() {
+    TrieNode* root = new TrieNode();
+
+    vector<string> dictionary = {
+        "hello", "help", "heap", "healthy", "heat",
+        "world", "word", "work", "worked"
+    };
+
+    for (int i = 0; i < dictionary.size(); i++) {
+        insert(root, dictionary[i]);
+    }
+
+    cout << "Enter a word: ";
+    string word;
+    cin >> word;
+
+    if (searchBool(root, word)) {
+        cout << "Correct word!" << endl;
+    } else {
+        cout << "Word not found. Suggestions:" << endl;
+
+        vector<string> suggestions = spellCheck(root, word);
+
+        if (suggestions.empty()) {
+            cout << "  No close matches.\n";
+        } else {
+            // -------- Long version loop --------
+            for (int i = 0; i < suggestions.size(); i++) {
+                string& s = suggestions[i];
+                cout << "  - " << s << endl;
+            }
+        }
+    }
+
+    return 0;
+}
