@@ -64,7 +64,6 @@ TrieNode* deleteKey(TrieNode* root, const string &key, int depth = 0) {
 
         return root;
     }
-
     int index = key[depth] - 'a';
     root->children[index] = deleteKey(root->children[index], key, depth + 1);
 
@@ -73,7 +72,6 @@ TrieNode* deleteKey(TrieNode* root, const string &key, int depth = 0) {
         delete root;
         return nullptr;
     }
-
     return root;
 }
 vector<string> generateEditDistance1(const string& word) {
@@ -133,8 +131,9 @@ vector<string> spellCheck(TrieNode* root, const string& word) {
 
     vector<string> dictionary = {
         "hello", "help", "heap", "healthy", "heat",
-        "world", "word", "work", "worked"     "spell", "sell", "fell", "tell", "yell",
-        "world", "word", "sword", "work", "fork",
+        "world", "word", "work", "worked"     
+        "spell", "sell", "fell", "tell", "yell",
+        "sword", "work", "fork",
         "book", "look", "took", "cook", "hook",
         "apple", "apply", "ample", "maple", "sample",
         "code", "coder", "coding", "decode", "encode",
